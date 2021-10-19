@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { addPost } from './searchBarSlice';
+import { addPost } from '../features/posts/postsSlice';
 import { useDispatch } from 'react-redux';
 
 export default function SearchBar(){
@@ -26,9 +26,6 @@ export default function SearchBar(){
     const handleSubmit = async () => {
         const data = await searchReddit(searchVal)
         dispatch(addPost(data))
-        /*data.forEach(obj => {
-            dispatch(addPost(obj))
-        })*/
     }
 
     return(
