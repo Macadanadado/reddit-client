@@ -1,13 +1,19 @@
-import './post.css';
 import { useSelector } from 'react-redux';
-// import { selectComments } from '../comments/commentsSlice.js'
+import { useEffect } from 'react';
+
+import Comments from '../comments/comments'
 import { selectActivePost } from '../posts/postsSlice';
 import { dateCalculator } from './posts';
+import { fetchPostData } from '../../app/Reddit';
+import './post.css';
 
 
 export default function Post() {
-  // const comments = useSelector(selectComments);
   const post = useSelector(selectActivePost);
+
+	// useEffect(()=>{
+	// 	fetchPostData(post.permalink)
+	// }, [])
 
   return(
     <div id='postWithComments'>
@@ -26,7 +32,7 @@ export default function Post() {
               <p className='data'>{post.numComments}</p>
           </div>
       </div>
-      
+      <Comments />
     </div>
   )
 }

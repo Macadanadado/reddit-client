@@ -3,15 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const PostsSlice = createSlice({
     name: 'posts',
     initialState: {
-        posts: {
-          /* yourMom: {
-            title: "Your Mom",
-            poster: "Your Mom",
-            timePosted: 'lateLastNight',
-            id: 1234
-          } */
-        },
-        activePost: {}
+        posts: {},
+        activePost: {},
+        activePostComments: {}
     },
     reducers: {
         addPost: (state, action) =>{//passed object {title, poster, timeposted,downVotes, upvotes id} from searchbar.js || passed array[{obj1}, {obj2},...]
@@ -31,13 +25,24 @@ export const PostsSlice = createSlice({
             }
           })  
         },
-        setActivePost: (state, action) => {
+        setActivePost: (state, action) => {//passed object {title, poster, timeposted,downVotes, upvotes id}
           state.activePost = action.payload
+        },
+        setActivePostComments: (state, action) => {
+          action.payload.forEach(obj => {
+            const {poster, comment, id} = obj
+            state.activePostComments[id] = {
+              poster,
+              comment,
+              id
+            }
+          })
         }
     }
 })
 
 export const selectPosts = state=> state.posts.posts;
 export const selectActivePost = state => state.posts.activePost;
-export const { addPost, setActivePost } = PostsSlice.actions;
+export const selectActivePostComments = state => state.posts.activePostComments
+export const { addPost, setActivePost, setActivePostComments } = PostsSlice.actions;
 export const postsReducer =  PostsSlice.reducer
