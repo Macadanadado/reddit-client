@@ -48,6 +48,7 @@ export const dateCalculator = (created) => {
                 style={{width: '30%', height: '30%'}} 
                 onError={(e)=> e.target.style.display = 'none'}
               />
+              <p>{post.content}</p>
               <div className='postData'>
                   <p className='data'>{post.upVotes - post.downVotes} upvotes</p>
                   <p className='data'>{dateCalculator(post.timePosted)}</p>

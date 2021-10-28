@@ -8,9 +8,16 @@ export default function SearchBar(){
   const [searchVal, setSearchVal] = useState('')
   const dispatch = useDispatch()
 
-  useEffect(async ()=> {
-    const data = await searchReddit('halloween')
-    dispatch(addPost(data))
+  const terms = ['halloween', 'candy', 'costumes', 'halloween decorations', 'haunted house'];
+  const randomSearch = terms[Math.floor(Math.random() * terms.length)]
+
+  useEffect(()=>{
+    async function fetchFunction(){
+      const data = await searchReddit(randomSearch);
+      dispatch(addPost(data));
+    }
+
+    fetchFunction()
   },[])
 
   const handleSubmit = async () => {
@@ -27,7 +34,7 @@ export default function SearchBar(){
   return(
     <div>
       <input placeholder='Search' onChange={(e) => setSearchVal(e.target.value)} onKeyPress={(e) => handleKeyPress(e)}/>
-      <button className='SearchButton' onClick={() => {handleSubmit()}/*just pass handleSubmit for constant update of state? */}>Sumbit</button>
+      <button className='SearchButton' onClick={() => {handleSubmit()}}>Sumbit</button>
     </div>
   )
 }

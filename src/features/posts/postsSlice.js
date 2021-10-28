@@ -11,24 +11,26 @@ export const PostsSlice = createSlice({
         addPost: (state, action) =>{//passed object {title, poster, timeposted,downVotes, upvotes id} from searchbar.js || passed array[{obj1}, {obj2},...]
           state.posts = {}
           action.payload.forEach(obj => {
-            const {title, poster, timePosted, downVotes, upVotes, numComments, permalink, url, id} = obj
-            state.posts[id] = {
-                title,
-                poster,
-                timePosted,
-                downVotes,
-                upVotes,
-                numComments,
-                permalink,
-                url,
-                id
-            }
+            //const {title, poster, timePosted, downVotes, upVotes, numComments, permalink, url, content id} = obj
+            state.posts[obj.id] = obj
+            //{
+            //     title,
+            //     poster,
+            //     timePosted,
+            //     downVotes,
+            //     upVotes,
+            //     numComments,
+            //     permalink,
+            //     url,
+            //     id
+            // }
           })  
         },
         setActivePost: (state, action) => {//passed object {title, poster, timeposted,downVotes, upvotes id}
           state.activePost = action.payload
         },
         setActivePostComments: (state, action) => {
+          state.activePostComments = {}
           action.payload.forEach(obj => {
             const {poster, comment, id} = obj
             state.activePostComments[id] = {
@@ -37,8 +39,8 @@ export const PostsSlice = createSlice({
               id
             }
           })
+          }
         }
-    }
 })
 
 export const selectPosts = state=> state.posts.posts;

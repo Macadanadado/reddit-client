@@ -1,19 +1,14 @@
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 
 import Comments from '../comments/comments'
 import { selectActivePost } from '../posts/postsSlice';
 import { dateCalculator } from './posts';
-import { fetchPostData } from '../../app/Reddit';
 import './post.css';
 
 
 export default function Post() {
   const post = useSelector(selectActivePost);
-
-	// useEffect(()=>{
-	// 	fetchPostData(post.permalink)
-	// }, [])
 
   return(
     <div id='postWithComments'>
@@ -25,7 +20,7 @@ export default function Post() {
           style={{width: '30%', height: '30%'}} 
           onError={(e)=> e.target.style.display = 'none'}
         />
-          <p id='content'>postContent</p>
+          <p id='content'>{post.content}</p>
           <div className='postData'>
              <p className='data'>{post.upVotes - post.downVotes} upvotes</p>
               <p className='data'>{dateCalculator(post.timePosted)}</p>

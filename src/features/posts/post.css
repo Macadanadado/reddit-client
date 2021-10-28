@@ -1,0 +1,20 @@
+.postData {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.data {
+    border-bottom: 1px solid gray
+}
+
+#title {
+    width: 100%;
+    border-bottom: 1px solid gray;
+}
+
+#post {
+    width: 90%;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+}
