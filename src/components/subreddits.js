@@ -1,17 +1,19 @@
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom";
 
-import { setActiveSubReddit, selectSubReddits, selectAvtiveSubReddit, addSubReddit } from "./subredditsSlice";
+import { setActiveSubReddit, selectSubReddits, selectActiveSubReddit, addSubReddit } from "./subredditsSlice";
 import redditLogo from '../images/reddit-logo.png'
 import { fetchSubReddits, fetchSubRedditPosts } from "../app/Reddit";
 import { useEffect } from "react";
 import { addPost } from "../features/posts/postsSlice";
 
+import './navbar.css'
+
 
 
 export default function SubReddits() {
   const subReddits = useSelector(selectSubReddits)
-  const activeSub = useSelector(selectAvtiveSubReddit)
+  const activeSub = useSelector(selectActiveSubReddit)
   const dispatch = useDispatch()
 
   useEffect(()=>{
@@ -23,15 +25,16 @@ export default function SubReddits() {
   },[])
 
   return(
-    <section>
+    <section id='subreddits'>
       <ul>
         {Object.values(subReddits).map(sub=> (
-          <li key={sub.id} style={{listStyleType: 'none'}}>
+          <li key={sub.id} className={sub.url === activeSub.url ? 'activeSub' : 'undefined'}>
             <Link 
             to='/' 
+            className='sub'
             onClick={()=>{
               async function myFunction(){
-                dispatch(setActiveSubReddit(sub.url));  
+                dispatch(setActiveSubReddit(sub));  
                 const newPosts = await fetchSubRedditPosts(sub.url);
                 dispatch(addPost(newPosts));
               }
@@ -41,10 +44,9 @@ export default function SubReddits() {
                 <img 
                 src={sub.icon} 
                 alt=''
-                style={{width: '30px', height: '30px', borderRadius: '50%'}}
                 onError={(e)=> e.target.src = redditLogo}
                 />
-                <p>{sub.name}</p>
+                <p className='subName'>{sub.name}</p>
               </div>
             </Link>
           </li>

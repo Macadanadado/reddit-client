@@ -10,12 +10,7 @@ export const subRedditSlice = createSlice({
     addSubReddit: (state, action) => { 
       action.payload.forEach(obj=>{
         const {name, url, icon, id} = obj
-        state.subReddits[id] = {
-          name,
-          url,
-          icon,
-          id
-        }
+        state.subReddits[id] = obj
       })
     },
     setActiveSubReddit: (state, action) => {
@@ -25,6 +20,6 @@ export const subRedditSlice = createSlice({
 })
 
 export const selectSubReddits = state => state.subReddits.subReddits;
-export const selectAvtiveSubReddit = state => state.subReddits.activeSubReddit;
+export const selectActiveSubReddit = state => state.subReddits.activeSubReddit;
 export const { addSubReddit, setActiveSubReddit } = subRedditSlice.actions;
 export const subRedditReducer = subRedditSlice.reducer

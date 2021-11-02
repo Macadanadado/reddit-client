@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { selectPosts, setActivePost } from "./postsSlice" 
+import './post.css'
 
 export const dateCalculator = (created) => {
   const currentDate = Date.now();
@@ -32,31 +33,32 @@ export const dateCalculator = (created) => {
  export default function Posts() {
   const posts = useSelector(selectPosts);
   const dispatch = useDispatch();
-  const postStyle = {
-    color: 'black',
-    textDecoration: 'none',
-  };
 
     return (
-      Object.values(posts).map((post) => (
-        <Link to='/post' key={post.id} style={postStyle} onClick={()=> dispatch(setActivePost(post))}>
-          <div id='post'>
-              <h2 id='title'>{post.title}</h2>
-              <img 
-                src={post.url} 
-                alt=''
-                style={{width: '30%', height: '30%'}} 
-                onError={(e)=> e.target.style.display = 'none'}
-              />
-              <p>{post.content}</p>
-              <div className='postData'>
-                  <p className='data'>{post.upVotes - post.downVotes} upvotes</p>
-                  <p className='data'>{dateCalculator(post.timePosted)}</p>
-                  <p className='data'>{post.poster}</p>
-                  <p className='data'>{post.numComments}</p>
-              </div>
-          </div>
-        </Link>
-      ))
+      <section id='posts'>
+        {Object.values(posts).map((post) => (
+          <Link to='/post' 
+          key={post.id} 
+          className='postInPosts'
+          onClick={()=> dispatch(setActivePost(post))}
+          >
+            <div id='post'>
+                <h2 id='title'>{post.title}</h2>
+                <img 
+                  src={post.url} 
+                  alt=''
+                  onError={(e)=> e.target.style.display = 'none'}
+                />
+                <p>{post.content}</p>
+                <div className='postData'>
+                    <p className='data'>{post.upVotes - post.downVotes} upvotes</p>
+                    <p className='data'>{dateCalculator(post.timePosted)}</p>
+                    <p className='data'>{post.poster}</p>
+                    <p className='data'>{post.numComments} comments</p>
+                </div>
+            </div>
+          </Link>
+      ))}
+      </section>
     )
 }

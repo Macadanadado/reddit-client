@@ -1,0 +1,53 @@
+#navBar {
+  height: 18em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.title {
+  margin: 0;
+}
+
+.sub {
+  text-decoration: none;
+  color: black;
+  
+}
+
+#subreddits ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-left: 0;
+}
+
+#subreddits ul li{
+  list-style-type: none;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  width: 10%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#subreddits ul .activeSub{
+  background-color: rgb(255, 107, 0, 1);
+}
+
+#subreddits ul li:hover {
+  background-color: rgb(255, 107, 0, .5);
+}
+
+#subreddits ul li img {
+  width: 2em;
+  height: 2em; 
+  border-radius: 50%;
+}
+
+#subreddits ul li .subName{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+}

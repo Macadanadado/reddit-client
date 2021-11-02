@@ -20,11 +20,13 @@ export default function Comments(){
   
 
   return(
-    Object.values(comments).map(comment=>(
-      <div key={comment.id}>
-        <p>{comment.poster}</p>
-        <p>{comment.comment}</p>
-      </div>
-    ))
+    <section className='comments'>
+      {Object.values(comments).map(comment=>(
+        <div key={comment.id} className='comment'>
+          <p className='poster'>{comment.poster}</p>
+          <p className='content'>{comment.comment}</p>
+        </div>
+    ))}
+    </section>
   )
 }

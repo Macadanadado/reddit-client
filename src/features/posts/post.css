@@ -1,3 +1,22 @@
+/*posts*/
+#posts {
+  width: 90%;
+  margin-top: 1em;
+}
+
+#posts img {
+  width: 30%;
+  height: 30%;
+}
+
+.postInPosts {
+  color: black;
+  text-decoration: none;
+}
+
+
+
+/*Individual Post*/
 .postData {
     display:flex;
     flex-direction: row;
@@ -5,16 +24,40 @@
 }
 
 .data {
-    border-bottom: 1px solid gray
+    border-bottom: 1px solid rgb(51, 112, 99)
 }
 
 #title {
     width: 100%;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgb(51, 112, 99);
 }
 
 #post {
-    width: 90%;
-    margin-bottom: 10px;
-    border: 1px solid gray;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    border: 2px solid rgb(51, 112, 99);
+    background-color: rgb(0, 204, 158);
+
+}
+
+#postWithComments {
+  width: 90%;
+}
+
+.comments{
+  border: 1px solid rgb(51, 112, 99);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(0, 204, 158);
+  padding-top: 10px
+}
+
+.comment {
+  width: 95%;
+  border: 1px solid rgb(51, 112, 99);
+  margin-bottom: 10px;
+  background-color: rgb(102, 224, 197);
+  text-align: left;
+  padding: 10px;
 }

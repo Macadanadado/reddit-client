@@ -10,10 +10,12 @@ function App() {
     <Router>
       <div className='App'>
         <NavBar />
-        <Switch>
-          <Route path="/" exact component={Posts} />
-          <Route path='/post'component={Post} />
-        </Switch>
+        <main>
+          <Switch>
+            <Route path="/" exact component={Posts} />
+            <Route path='/post'component={Post} />
+          </Switch>
+        </main>
       </div>
     </Router>
   )  

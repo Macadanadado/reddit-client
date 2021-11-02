@@ -44,7 +44,7 @@ export const fetchSubRedditPosts = async (subreddit)=>{
 export const fetchPostComments = async (permalink)=>{
   const response = await fetch(`https://www.reddit.com${permalink}.json`);
   const jsonResponse = await response.json();
-  console.log(jsonResponse)
+  //console.log(jsonResponse)
   return jsonResponse[1].data.children.map(user => {
     const userComment = user.data
     return {
@@ -56,15 +56,16 @@ export const fetchPostComments = async (permalink)=>{
 }
 
 export const fetchSubReddits = async () => {
-  const response = await fetch(`https://www.reddit.com/subreddits.json`)
+  const response = await fetch(`https://www.reddit.com/subreddits.json?limit=10`)
   const jsonResponse = await response.json();
-  //console.log(jsonResponse)
+  console.log(jsonResponse)
   return jsonResponse.data.children.map(subReddit => {
     const data = subReddit.data;
     return{
       name: data.display_name_prefixed,
       url: data.url,
       icon: data.community_icon.split('?')[0],
+      banner: data.banner_img,
       id: data.id
     }
   })
