@@ -61,3 +61,11 @@
   text-align: left;
   padding: 10px;
 }
+
+
+@media only screen and (max-width : 480px){
+  #posts img{
+    width: 90%;
+    height: 90%;
+  }
+}

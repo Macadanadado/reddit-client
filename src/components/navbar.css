@@ -5,8 +5,25 @@
   justify-content: space-around;
 }
 
+.navIsVisible {
+  visibility: visible;
+}
+
+.navIsNotVisible {
+  visibility: hidden;
+  display: none
+}
+
 .title {
   margin: 0;
+}
+
+.searchButton {
+  margin-left: 10px;
+  height: 2em;
+  width: 5em;
+  background-color: orange;
+  border-radius: 1em;
 }
 
 .sub {
@@ -50,4 +67,47 @@
   overflow: hidden;
   white-space: nowrap;
   text-decoration: none;
+}
+
+@media only screen and (max-width : 480px) {
+  .mobileNavBar {
+    visibility: visible;
+  }
+
+  .desktopNavBar {
+    visibility: hidden;
+    display: none;
+  }
+
+  #subreddits{
+    position: absolute;
+    width: 100%;
+  }
+
+  #subreddits ul {
+    flex-direction: column;
+    background-color: rgb(0, 153, 118);
+  }
+
+  #subreddits ul li{
+    width: 100%;
+  }
+
+  .menuBtn {
+    border-radius: 2em;
+    width: 11em;
+    height: 4em;
+    background-color: orange;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 481px){
+  .mobileNavBar {
+    visibility: hidden;
+    display: none;
+  }
+  .desktopNavBar {
+    visibility: visible;
+  }
 }

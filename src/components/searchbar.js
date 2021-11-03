@@ -42,7 +42,7 @@ export default function SearchBar(){
       <input placeholder='Search' 
       onChange={(e) => setSearchVal(e.target.value)} 
       onKeyPress={(e) => handleKeyPress(e)}/>
-      <button className='SearchButton' onClick={() => {handleSubmit()}}>Search</button>
+      <button className='searchButton' onClick={() => {handleSubmit()}}>Search</button>
     </div>
   )
 }
