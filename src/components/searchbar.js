@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { addPost } from '../features/posts/postsSlice';
 import { searchReddit } from '../app/Reddit';
-import { fetchSubRedditPosts } from '../app/Reddit';
+import { fetchPostData } from '../app/Reddit';
 
 import './navbar.css'
 
@@ -16,7 +16,22 @@ export default function SearchBar(){
 
   useEffect(()=>{
       async function myFunction(){ 
-        const newPosts = await fetchSubRedditPosts('/r/Home');
+        const jsonResponse = await fetchPostData('/r/Home');
+        const newPosts = jsonResponse.data.children.map(post => {
+          const data = post.data;
+          return {
+            title: data.title,
+            poster: data.author,
+            timePosted: data.created,
+            downVotes: data.downs,
+            upVotes: data.ups,
+            numComments: data.num_comments,
+            permalink: data.permalink,
+            url: data.url,
+            content: data.selftext,
+            id: data.id
+          }
+        })
         dispatch(addPost(newPosts));
     }
     // async function fetchFunction(){

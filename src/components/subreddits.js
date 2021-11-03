@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { setActiveSubReddit, selectSubReddits, selectActiveSubReddit, addSubReddit } from "./subredditsSlice";
 import redditLogo from '../images/reddit-logo.png'
-import { fetchSubReddits, fetchSubRedditPosts } from "../app/Reddit";
+import { fetchSubReddits, fetchPostData } from "../app/Reddit";
 import { useEffect } from "react";
 import { addPost } from "../features/posts/postsSlice";
 
@@ -24,6 +24,26 @@ export default function SubReddits() {
     myFunction()
   },[])
 
+
+  async function helperFunction(url){
+    const jsonResponse = await fetchPostData(url)
+    return jsonResponse.data.children.map(post => {
+      const data = post.data;
+       return {
+        title: data.title,
+        poster: data.author,
+        timePosted: data.created,
+        downVotes: data.downs,
+        upVotes: data.ups,
+        numComments: data.num_comments,
+        permalink: data.permalink,
+        url: data.url,
+        content: data.selftext,
+        id: data.id
+      }
+    })
+  }
+
   return(
     <section id='subreddits'>
       <ul>
@@ -35,7 +55,7 @@ export default function SubReddits() {
             onClick={()=>{
               async function myFunction(){
                 dispatch(setActiveSubReddit(sub));  
-                const newPosts = await fetchSubRedditPosts(sub.url);
+                const newPosts = await helperFunction(sub.url);
                 dispatch(addPost(newPosts));
               }
               myFunction()

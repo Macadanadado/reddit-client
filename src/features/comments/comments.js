@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-import { fetchPostComments } from "../../app/Reddit"
+import { fetchPostData } from "../../app/Reddit"
 import { selectActivePost, selectActivePostComments, setActivePostComments } from '../posts/postsSlice';
 
 export default function Comments(){
@@ -11,7 +11,15 @@ export default function Comments(){
 
   useEffect(()=>{
     async function fetchFunction(){
-      const yes = await fetchPostComments(post.permalink);
+      const jsonResponse = await fetchPostData(post.permalink);
+      const yes = jsonResponse[1].data.children.map(user=>{
+        const userComment = user.data;
+        return {
+          poster: userComment.author,
+          comment: userComment.body,
+          id: userComment.id
+        }
+      })
       dispatch(setActivePostComments(yes));
     }
 
